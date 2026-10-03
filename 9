@@ -1,0 +1,42 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int N;
+    cout << "Количество самолетов ? ";
+    cin >> N;
+    double r = 1.2; 
+    double V = 200.0; 
+    double max = -1000.0; 
+    int best = 0;      
+
+    for (int i = 0; i < N; i++) {
+        cout << "\n Самолет №" << (i + 1) << endl;
+        double m, S, T, CD, CL;
+        cout << "Введите массу m: ";
+        cin >> m;
+        cout << "Введите площадь крыла S: ";
+        cin >> S;
+        cout << "Введите тягу T: ";
+        cin >> T;
+        cout << "Введите коэффициент сопротивления CD: ";
+        cin >> CD;
+        cout << "Введите коэффициент подъемной силы CL: ";
+        cin >> CL;
+
+        double L = 0.5 * r * (V * V) * S * CL;
+        double D = 0.5 * r * (V * V) * S * CD;
+        double a = (T - D) / m;
+        cout << "  Подъемная сила L: " << L << " Н" << endl;
+        cout << "  Сопротивление D:  " << D << " Н" << endl;
+        cout << "  Ускорение a:   " << a << " м/с^2" << endl;
+
+        if (a > max) {
+            max = a;
+            best = i + 1;   }  }
+
+    cout << "Самолет №" << best;
+    cout << "  Ускорение:  " << max << " м/с^2" << endl;
+
+    return 0;
+}
