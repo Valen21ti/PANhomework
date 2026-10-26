@@ -1,0 +1,40 @@
+#include <iostream>
+#include <vector>
+#include <iomanip>
+
+struct Point {
+    double x;
+    double y;
+    double z;     };
+
+int main() {
+    double vx = 30.0, vy = 20.0, vz = 40.0;
+    double dt = 1.0,  t_max = 10.0;
+    double x = 0.0, y = 0.0, z = 0.0;
+    std::vector<Point> traj;
+    traj.reserve((int)(t_max / dt) + 1);
+    std::vector<double> times;
+    for (double t = 0.0; t <= t_max; t += dt) {
+        Point p;
+        p.x = x;
+        p.y = y;
+        p.z = z;
+        traj.push_back(p);
+        times.push_back(t);
+        x += vx * dt;
+        y += vy * dt;
+        z += vz * dt; }
+    std::cout << std::setw(8) << "t, c"
+              << std::setw(12) << "x, м"
+              << std::setw(12) << "y, м"
+              << std::setw(12) << "z, м" << std::endl;
+    for (size_t i = 0; i < traj.size(); i++) {
+        std::cout << std::setw(8) << std::fixed << std::setprecision(2) << times[i]
+                  << std::setw(12) << traj[i].x
+                  << std::setw(12) << traj[i].y
+                  << std::setw(12) << traj[i].z
+                  << std::endl;
+    }
+
+    return 0;
+}
