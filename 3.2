@@ -1,0 +1,41 @@
+#include <iostream>
+#include <vector>
+#include <iomanip>
+
+int main() {
+    double v0 = 50.0;
+    double g = 9.8;
+    double dt = 1.0;
+
+    if (v0 <= 0) {
+        std::cout << "начальная скорость меньше нуля" << std::endl;
+        return 0; }
+    std::vector<double> times;
+    std::vector<double
+> heights;
+
+    
+for (double t = 0.0; t <= 1000; t += dt) {
+        double h = v0 * t - 0.5 * g * t * t;
+        if (h < 0) {
+            break;
+        }
+        times.push_back(t);
+        heights.push_back
+(h); }
+
+    if (heights.empty()) {
+        std::cout << "нет данных" << std::endl;
+        return 0;    }
+    size_t idx_max = 0;
+    for (size_t i = 1; i < heights.size(); ++i) {
+        if (heights[i] > heights[idx_max]) {
+            idx_max = i;  }  }
+
+    std::cout << "максимальная высота: "
+              << std::fixed << std::setprecision(2) << heights[idx_max] << " м" << std::endl;
+  std::cout << "время: "
+              << std::fixed << std::setprecision(2) << times[idx_max] << " с" << std::endl;
+
+    return 0;
+}
